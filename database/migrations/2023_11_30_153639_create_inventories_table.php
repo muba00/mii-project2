@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('item_warehouse_location', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('warehouse_location_id');
@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('warehouse_location_id')->references('id')->on('warehouse_locations')->onDelete('cascade');
         });
-        
     }
 
     /**
@@ -29,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('item_warehouse_location');
+        Schema::dropIfExists('inventories');
     }
 };
