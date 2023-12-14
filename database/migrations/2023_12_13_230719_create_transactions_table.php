@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventories', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->boolean('synced')->default(false);
+            $table->enum('type', ['received', 'shipped', 'moved', 'adjusted', 'damaged', 'expired', 'lost']);
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('warehouse_location_id');
-            $table->integer('quantity')->default(0);
+            $table->integer('quantity');
+            $table->string('comment')->nullable();
             $table->timestamps();
-        
-            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
-            $table->foreign('warehouse_location_id')->references('id')->on('warehouse_locations')->onDelete('cascade');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventories');
+        Schema::dropIfExists('transactions');
     }
 };

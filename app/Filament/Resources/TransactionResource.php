@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\InventoryResource\Pages;
-use App\Filament\Resources\InventoryResource\RelationManagers;
-use App\Models\Inventory;
+use App\Filament\Resources\TransactionResource\Pages;
+use App\Filament\Resources\TransactionResource\RelationManagers;
+use App\Models\Transaction;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -16,17 +16,28 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Models\Item;
 use App\Models\WarehouseLocation;
 
-class InventoryResource extends Resource
+class TransactionResource extends Resource
 {
-    protected static ?string $model = Inventory::class;
+    protected static ?string $model = Transaction::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Inventory';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
+                Forms\Components\Select::make('type')
+                    // enum('received','shipped','moved','adjusted','damaged','expired','lost')
+                    ->options([
+                        'received' => 'Received',
+                        'shipped' => 'Shipped',
+                        'moved' => 'Moved',
+                        'adjusted' => 'Adjusted',
+                        'damaged' => 'Damaged',
+                        'expired' => 'Expired',
+                        'lost' => 'Lost',
+                    ])
+                    ->required(),
                 Forms\Components\Select::make('warehouse_location_id')
                     ->options(
                         WarehouseLocation::query()
@@ -47,6 +58,9 @@ class InventoryResource extends Resource
                     )
                     ->required()
                     ->searchable(),
+                Forms\Components\TextInput::make('quantity')
+                    ->required()
+                    ->numeric(),
             ]);
     }
 
@@ -54,6 +68,8 @@ class InventoryResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('type')
+                    ->label("Type"),
                 Tables\Columns\TextColumn::make('warehouseLocation.longName')
                     ->label('Warehouse Location'),
                 Tables\Columns\TextColumn::make('item.name')
@@ -83,9 +99,9 @@ class InventoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInventories::route('/'),
-            // 'create' => Pages\CreateInventory::route('/create'),
-            // 'edit' => Pages\EditInventory::route('/{record}/edit'),
+            'index' => Pages\ListTransactions::route('/'),
+            'create' => Pages\CreateTransaction::route('/create'),
+            // 'edit' => Pages\EditTransaction::route('/{record}/edit'),
         ];
     }
 }
