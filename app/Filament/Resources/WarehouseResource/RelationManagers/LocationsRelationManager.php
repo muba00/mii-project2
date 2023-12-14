@@ -38,6 +38,19 @@ class LocationsRelationManager extends RelationManager
                     )
                     ->nullable()
                     ->searchable(),
+                Forms\Components\Fieldset::make('Dimensions')
+                    ->relationship('dimensions')
+                    ->schema([
+                        Forms\Components\TextInput::make('width')
+                            ->default(0)
+                            ->numeric(),
+                        Forms\Components\TextInput::make('height')
+                            ->default(0)
+                            ->numeric(),
+                        Forms\Components\TextInput::make('depth')
+                            ->default(0)
+                            ->numeric(),
+                    ]),
             ]);
     }
 

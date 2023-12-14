@@ -23,7 +23,15 @@ class ItemResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('gtin')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('weight')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 

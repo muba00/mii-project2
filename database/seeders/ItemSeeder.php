@@ -16,10 +16,17 @@ class ItemSeeder extends Seeder
     {
         // Using a loop to add 20 items
         for ($i = 1; $i <= 20; $i++) {
-            Item::create([
+            $item = Item::create([
                 'name' => 'Item ' . $i,
                 'gtin' => '1234567890' . $i,
                 'weight' => rand(300, 1000), // Random weight between 300 and 1000 grams
+            ]);
+
+            // add random dimensions
+            $item->dimensions()->create([
+                'width' => rand(10, 100),
+                'height' => rand(10, 100),
+                'depth' => rand(10, 100),
             ]);
         }
     }

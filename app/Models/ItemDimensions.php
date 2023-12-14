@@ -10,4 +10,14 @@ class ItemDimensions extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function getVolumeAttribute()
+    {
+        return $this->width * $this->height * $this->depth;
+    }
 }
