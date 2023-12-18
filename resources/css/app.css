@@ -1,0 +1,15 @@
+body {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+header {
+    color: #fff !important;
+}
+
+footer {
+    margin-top: 30px;
+    position: sticky;
+    bottom: 0 !important;
+    background-color: #eee !important;
+}
