@@ -61,6 +61,7 @@ class TransactionResource extends Resource
                 Forms\Components\TextInput::make('quantity')
                     ->required()
                     ->numeric(),
+                Forms\Components\TextInput::make('comment'),
             ]);
     }
 
@@ -75,6 +76,7 @@ class TransactionResource extends Resource
                 Tables\Columns\TextColumn::make('item.name')
                     ->label('Item'),
                 Tables\Columns\TextColumn::make('quantity'),
+                Tables\Columns\TextColumn::make('comment'),
             ])
             ->filters([
                 //
