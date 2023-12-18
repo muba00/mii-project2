@@ -32,6 +32,19 @@ class ItemResource extends Resource
                 Forms\Components\TextInput::make('weight')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\Fieldset::make('Dimensions')
+                    ->relationship('dimensions')
+                    ->schema([
+                        Forms\Components\TextInput::make('width')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('height')
+                            ->required()
+                            ->maxLength(255),
+                        Forms\Components\TextInput::make('depth')
+                            ->required()
+                            ->maxLength(255),
+                    ]),
             ]);
     }
 
