@@ -61,7 +61,8 @@ class LocationsRelationManager extends RelationManager
             ->columns([
                 Tables\Columns\TextColumn::make('longName')
                     ->label('Name'),
-                Tables\Columns\TextColumn::make('code'),
+                Tables\Columns\TextColumn::make('longCode')
+                    ->label('Code'),
                 // Tables\Columns\TextColumn::make('parentLocation.name')
                 //     ->label('Parent Location'),
             ])

@@ -55,7 +55,7 @@ class WarehouseSeeder extends Seeder
         for ($a = 1; $a <= 6; $a++) {
             $aisle = WarehouseLocation::create([
                 'name' => 'Aisle ' . $a,
-                'code' => 'aisle' . $a,
+                'code' => $a,
                 'warehouse_id' => $w->id,
                 'parent_id' => $s->id,
             ]);
@@ -63,7 +63,7 @@ class WarehouseSeeder extends Seeder
             for ($r = 1; $r <= 6; $r++) {
                 $row = WarehouseLocation::create([
                     'name' => 'Row ' . $r,
-                    'code' => 'row' . $r,
+                    'code' => $r,
                     'warehouse_id' => $w->id,
                     'parent_id' => $aisle->id,
                 ]);
@@ -71,7 +71,7 @@ class WarehouseSeeder extends Seeder
                 for ($l = 1; $l <= 4; $l++) {
                     $level = WarehouseLocation::create([
                         'name' => 'Level ' . $l,
-                        'code' => 'level' . $l,
+                        'code' => $l,
                         'warehouse_id' => $w->id,
                         'parent_id' => $row->id,
                     ]);
@@ -79,7 +79,7 @@ class WarehouseSeeder extends Seeder
                     for ($p = 1; $p <= 5; $p++) {
                         WarehouseLocation::create([
                             'name' => 'Place ' . $p,
-                            'code' => 'place' . $p,
+                            'code' => $p,
                             'warehouse_id' => $w->id,
                             'parent_id' => $level->id,
                         ]);
