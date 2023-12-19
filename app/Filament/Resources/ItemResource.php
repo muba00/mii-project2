@@ -32,6 +32,9 @@ class ItemResource extends Resource
                 Forms\Components\TextInput::make('weight')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\FileUpload::make('image')
+                    ->image()
+                    ->imageCropAspectRatio('1:1'),
                 Forms\Components\Fieldset::make('Dimensions')
                     ->relationship('dimensions')
                     ->schema([
