@@ -43,12 +43,15 @@ async function detectBarcode(videoEl, setScannedBarcode, stream) {
     return interval;
 }
 
-export default function ItemScanner({ setScannedBarcode }) {
+export default function ItemScanner({ scannedBarcode, setScannedBarcode }) {
     const videoRef = useRef(null);
 
     useEffect(() => {
+        if (scannedBarcode) return;
+
         let interval;
         let stream;
+
         streamVideo(videoRef.current).then((st) => {
             stream = st;
             interval = detectBarcode(videoRef.current, setScannedBarcode, stream);
@@ -58,7 +61,7 @@ export default function ItemScanner({ setScannedBarcode }) {
             clearInterval(interval);
             destroyVideo(stream);
         }
-    }, [])
+    }, [scannedBarcode])
 
 
     return (

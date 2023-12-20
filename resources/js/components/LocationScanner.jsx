@@ -40,12 +40,15 @@ async function detectQRcode(videoEl, setScannedLocationQRCode, stream) {
     return interval;
 }
 
-export default function LocationScanner({ setScannedLocationQRCode }) {
+export default function LocationScanner({ scannedLocationQRCode, setScannedLocationQRCode }) {
     const videoRef = useRef(null);
 
     useEffect(() => {
+        if (scannedLocationQRCode) return;
+
         let interval;
         let stream;
+
         streamVideo(videoRef.current).then((st) => {
             stream = st;
             interval = detectQRcode(videoRef.current, setScannedLocationQRCode, stream);
@@ -55,7 +58,7 @@ export default function LocationScanner({ setScannedLocationQRCode }) {
             clearInterval(interval);
             destroyVideo(stream);
         }
-    }, [])
+    }, [scannedLocationQRCode])
 
 
     return (
