@@ -20,3 +20,28 @@ footer {
     max-width: 300px;
     margin: 0 auto;
 }
+
+.scanned-item {
+    padding: 10px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    display: flex;
+}
+
+.scanned-item img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+    display: block;
+}
+
+.scanned-item .info {
+    flex: 1;
+    color: #999;
+}
+
+.scanned-item .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #000 !important;
+}

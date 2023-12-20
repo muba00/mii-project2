@@ -126,8 +126,15 @@ export default function ReceiveItemsPage() {
                     :
                     <>
                         <h2>Scanned Item:</h2>
-                        <div>
-                            <h1>{scannedItem?.name}</h1>
+                        <div className="scanned-item">
+                            <div>
+                                <img src={(scannedItem?.image_url) ? scannedItem?.image_url : '/imgs/box.svg'} alt={scannedItem?.name} />
+                            </div>
+                            <div className="info">
+                                <div className="title">{scannedItem?.name}</div>
+                                <div>GTIN: {scannedItem?.gtin}</div>
+                                <div>Weight: {scannedItem?.weight}</div>
+                            </div>
                         </div>
                         <h2 style={{ textAlign: 'center' }}>Scan Location</h2>
                         <LocationScanner {...{ setScannedLocationQRCode }} />
