@@ -1,32 +1,29 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 
 
-async function streamVideo() {
+async function streamVideo(videoEl) {
     const stream = await navigator.mediaDevices.getUserMedia({
         video: {
             facingMode: { ideal: 'environment' }
         },
         audio: false
     });
-    const videoEl = document.querySelector('#scanner');
+
     videoEl.srcObject = stream;
     await videoEl.play();
 
-    return videoEl;
+    return stream;
 }
 
-function destroyVideo(videoEl) {
-    const stream = videoEl.srcObject;
+function destroyVideo(stream) {
     const tracks = stream.getTracks();
 
     tracks.forEach(function (track) {
         track.stop();
     });
-
-    videoEl.srcObject = null;
 }
 
-async function detectBarcode(videoEl, setScannedBarcode) {
+async function detectBarcode(videoEl, setScannedBarcode, stream) {
     if ('BarcodeDetector' in window) {
         console.log('Barcode Detector supported!');
     } else {
@@ -38,7 +35,7 @@ async function detectBarcode(videoEl, setScannedBarcode) {
         const barcodes = await barcodeDetector.detect(videoEl);
         if (barcodes.length > 0) {
             clearInterval(interval);
-            destroyVideo(videoEl);
+            destroyVideo(stream);
             setScannedBarcode(barcodes[0].rawValue);
         }
     }, 1000);
@@ -47,22 +44,26 @@ async function detectBarcode(videoEl, setScannedBarcode) {
 }
 
 export default function ItemScanner({ setScannedBarcode }) {
+    const videoRef = useRef(null);
+
     useEffect(() => {
         let interval;
-        streamVideo().then((videoEl) => {
-            interval = detectBarcode(videoEl, setScannedBarcode);
+        let stream;
+        streamVideo(videoRef.current).then((st) => {
+            stream = st;
+            interval = detectBarcode(videoRef.current, setScannedBarcode, stream);
         });
 
         return () => {
             clearInterval(interval);
+            destroyVideo(stream);
         }
     }, [])
 
 
     return (
         <div>
-            <video id="scanner" />
-
+            <video className="video-stream" ref={videoRef} />
         </div>
     )
 }

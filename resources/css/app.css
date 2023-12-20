@@ -14,7 +14,7 @@ footer {
     background-color: #eee !important;
 }
 
-#scanner {
+.video-stream {
     display: block;
     width: 80%;
     max-width: 300px;
