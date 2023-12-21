@@ -62,7 +62,10 @@ export default function LocationScanner({ scannedLocationQRCode, setScannedLocat
 
 
     return (
-        <div>
+        <div className="video-stream-container">
+            <div className="scan-scope-container">
+                <img src="/imgs/scan-scope.svg" alt="scan-scope" className="scan-scope" />
+            </div>
             <video className="video-stream" ref={videoRef} />
         </div>
     )
