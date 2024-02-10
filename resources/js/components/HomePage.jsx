@@ -36,6 +36,14 @@ export default function HomePage() {
                     style={{ marginBottom: '10px', textAlign: 'left' }}
                     type="default"
                     block
+                >
+                    Move Places (all Items, Internal)
+                </Button>
+                <Button
+                    icon={<DoubleRightOutlined />}
+                    style={{ marginBottom: '10px', textAlign: 'left' }}
+                    type="default"
+                    block
                     onClick={() => window.location.href = '/admin'}
                 >
                     Admin Panel
