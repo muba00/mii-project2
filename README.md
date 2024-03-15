@@ -13,4 +13,4 @@ enhancing warehouse efficiency through technology implementation.
 
 # Documentation
 
-You can read/download the full documentation [here](https://github.com/muba00/mii-project2/blob/main/Project 2 - Mubariz Hajimuradov.pdf).
+You can read/download the full documentation [here](https://github.com/muba00/mii-project2/blob/main/Project%202%20-%20Mubariz%20Hajimuradov.pdf).
